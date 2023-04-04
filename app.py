@@ -65,17 +65,12 @@ def selecting():
     return response_string
 
 @app.route('/db_drop')
-def inserting():
+def dropping():
     conn = psycopg2.connect("postgres://lab10tsdb_user:6agfPU8lS9HEoX1PefNWXxgdkREINjJc@dpg-cglpdthmbg56g47s7920-a/lab10tsdb")
     cur = conn.cursor()
     cur.execute('''
-        INSERT INTO Basketball (First, Last, City, Name, Number)
-        Values
-        ('Jayson', 'Tatum', 'Boston', 'Celtics', 0),
-        ('Stephen', 'Curry', 'San Francisco', 'Warriors', 30),
-        ('Nikola', 'Jokic', 'Denver', 'Nuggets', 15),
-        ('Kawhi', 'Leonard', 'Los Angeles', 'Clippers', 2);
+        DROP TABLE Basketball;
     ''')
     conn.commit()
     conn.close()
-    return "Basketball Table Successfully Populated"
+    return "Basketball Table Successfully Dropped"
